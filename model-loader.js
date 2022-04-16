@@ -160,7 +160,7 @@ const loadModelUrl = async (href, filename = href) => {
   } else if (fileType === 'fbx') {
     const {manager, managerLoadPromise} = _makeManager();
     const model = await new Promise((accept, reject) => {
-      new THREE.FBXLoader(manager).load(href, scene => {
+      new FBXLoader(manager).load(href, scene => {
         accept({scene});
       }, xhr => {}, reject);
     });
