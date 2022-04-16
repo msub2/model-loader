@@ -1,264 +1,53 @@
 <!doctype html>
 <html>
   <head>
-    <style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  background-color: #000;
-  /* color: #F5F5F5; */
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-  // font-weight: 300;
-}
-.body {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-header {
-  position: absolute;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 50px;
-  background-color: #FFF;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-  align-items: center;
-  user-select: none;
-  z-index: 1;
-}
-header img {
-  width: 50px;
-  height: 50px;
-  margin: 0 20px;
-}
-header nav {
-  display: flex;
-  height: 100%;
-  padding: 0 10px;
-  letter-spacing: 0.9px;
-  align-items: center;
-  text-transform: uppercase;
-}
-header nav span {
-  display: flex;
-  height: 30px;
-  padding: 10px;
-  border-radius: 4px;
-  align-items: center;
-}
-header nav.selected span {
-  background-color: #5c6bc0;
-  color: #FFF;
-  cursor: default;
-}
-header nav:not(.selected):hover {
-  cursor: pointer;
-}
-header nav:not(.selected):hover span {
-  background-color: #EEE;
-}
-.examples {
-  width: 200px;
-  padding-top: 50px;
-  background-color: #FFF;
-  overflow-y: auto;
-}
-h1, h2, h3, h4, h5, h6, p, .examples > .multibutton {
-  margin: 20px 0;
-  padding: 0 20px;
-  font-weight: inherit;
-}
-li {
-  /* padding-left: 20px;
-  padding-right: 20px; */
-}
-.iframe-wrapper {
-  position: relative;
-  display: flex;
-  margin-top: 50px;
-  flex: 1;
-  background-color: #FFF;
-}
-.tabs {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.tabs .tab {
-  display: inline-flex;
-  margin: 5px 5px;
-  padding: 5px 10px;
-  background-color: #D8D8D8;
-  border-radius: 4px;
-  color: #000;
-  align-items: center;
-}
-.tabs .tab .text {
-  margin-right: 10px;
-  align-items: center;
-}
-.tabs .tab .close-x {
-  display: flex;
-  width: 20px;
-  height: 20px;
-  background-color: #ef5350;
-  color: #FFF;
-  justify-content: center;
-  align-items: center;
-}
-canvas {
-  width: 100% !important;
-  height: 100vh !important;
-  background-color: #f8f8f8;
-}
-a {
-  color: #AAA;
-  text-decoration: none;
-}
-a:hover {
-  color: #42a5f5;
-}
-a:active {
-  color: #1976d2;
-}
-.body > .multibutton {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-}
-.multibutton {
-  display: flex;
-}
-.multibutton .button:not(.first) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.multibutton .button:not(.last) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.button {
-  display: inline-flex;
-  margin-right: 5px;
-  padding: 8px 20px;
-  border: 2px solid;
-  border-radius: 100px;
-  color: #5c6bc0;
-  cursor: pointer;
-}
-/* .button:not(:last-child) {
-  margin-right: 20px;
-} */
-.button:not([disabled]):hover {
-  background-color: #5c6bc0;
-  border-color: #5c6bc0;
-  color: #FFF;
-}
-.button[disabled] {
-  color: #b71c1c;
-  cursor: auto;
-}
-#code-header:not(.open),
-#code-button:not(.open) .opened-text,
-#code-button.open .closed-text
-{
-  display: none;
-}
-.coming-soon {
-  color: #ccc;
-}
-.coming-soon-sub {
-  font-size: 10px;
-  display: block;
-}
-.header-link {
-  color: #666;
-}
-.code-header {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  display: flex;
-  align-items: center;
-  width: 600px;
-  height: 32px;
-  padding: 5px;
-  font-size: 13px;
-  color: #4caf50;
-  background-color: #f2f3f5;
-}
-.code {
-  position: absolute;
-  top: 82px;
-  bottom: 0;
-  right: 0;
-  width: 600px;
-  border: 0;
-  border-left: 5px solid #f2f3f5;
-  outline: none;
-}
-.code:not(.open) {
-  display: none;
-}
-input[type=text] {
-  width: 160px;
-  margin: 0 20px;
-  padding: 7px 15px;
-  background-color: #f2f3f5;
-  border: 0;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: inherit;
-  outline: none;
-}
-    </style>
-    <script src="three.js"></script>
-    <script src="OrbitControls.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.139.0/build/three.module.js"
+        }
+      }
+    </script>
   </head>
   <body>
     <div class=body>
       <header>
-        <img src="logo.svg">
         <nav class=selected><span>Model Loader</span></nav>
       </header>
 
       <div class=examples>
         <h3>Examples</h3>
         <p>
-          <a href="https://exokitxr.github.io/avatar-models/model.glb" class="a-avatar">model.glb</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model2.vrm" class="a-avatar">model2.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model3.unitypackage" class="a-avatar">model3.unitypackage</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model4.zip" class="a-avatar">model4.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model5.fbx" class="a-avatar">model5.fbx</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model6.zip" class="a-avatar">model6.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model7.vrm" class="a-avatar">model7.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model8.vrm" class="a-avatar">model8.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model9.vrm" class="a-avatar">model9.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model10.vrm" class="a-avatar">model10.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model11.vrm" class="a-avatar">model11.vrm</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model12.fbx" class="a-avatar">model12.fbx</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model13.zip" class="a-avatar">model13.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model14.zip" class="a-avatar">model14.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model15.zip" class="a-avatar">model15.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model16.zip" class="a-avatar">model16.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model17.zip" class="a-avatar">model17.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model18.zip" class="a-avatar">model18.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model19.zip" class="a-avatar">model19.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model20.zip" class="a-avatar">model20.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model21.zip" class="a-avatar">model21.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model22.zip" class="a-avatar">model22.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model23.zip" class="a-avatar">model23.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model24.zip" class="a-avatar">model24.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model25.zip" class="a-avatar">model25.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model26.zip" class="a-avatar">model26.zip</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model27.png" class="a-avatar">model27.png</a><br>
-          <a href="https://exokitxr.github.io/avatar-models/model28.png" class="a-avatar">model28.png</a><br>
+          <a href="https://avatar-models.exokit.org/model.glb" class="a-avatar">model.glb</a><br>
+          <a href="https://avatar-models.exokit.org/model2.vrm" class="a-avatar">model2.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model3.unitypackage" class="a-avatar">model3.unitypackage</a><br>
+          <a href="https://avatar-models.exokit.org/model4.zip" class="a-avatar">model4.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model5.fbx" class="a-avatar">model5.fbx</a><br>
+          <a href="https://avatar-models.exokit.org/model6.zip" class="a-avatar">model6.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model7.vrm" class="a-avatar">model7.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model8.vrm" class="a-avatar">model8.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model9.vrm" class="a-avatar">model9.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model10.vrm" class="a-avatar">model10.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model11.vrm" class="a-avatar">model11.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model12.vrm" class="a-avatar">model12.vrm</a><br>
+          <a href="https://avatar-models.exokit.org/model13.zip" class="a-avatar">model13.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model14.zip" class="a-avatar">model14.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model15.zip" class="a-avatar">model15.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model16.zip" class="a-avatar">model16.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model17.zip" class="a-avatar">model17.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model18.zip" class="a-avatar">model18.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model19.zip" class="a-avatar">model19.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model20.zip" class="a-avatar">model20.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model21.zip" class="a-avatar">model21.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model22.zip" class="a-avatar">model22.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model23.zip" class="a-avatar">model23.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model24.zip" class="a-avatar">model24.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model25.zip" class="a-avatar">model25.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model26.zip" class="a-avatar">model26.zip</a><br>
+          <a href="https://avatar-models.exokit.org/model27.png" class="a-avatar">model27.png</a><br>
+          <a href="https://avatar-models.exokit.org/model28.png" class="a-avatar">model28.png</a><br>
         </p>
         <div class=multibutton>
           <label for="upload-file-button">
@@ -273,18 +62,10 @@ input[type=text] {
       <div class=iframe-wrapper id=iframe-wrapper></div>
     </div>
     <script type=module>
+import * as THREE from 'three';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.139.0/examples/jsm/controls/OrbitControls.js';
 import ModelLoader from './model-loader.js';
 window.ModelLoader = ModelLoader;
-
-/* const peerPoseUpdateRate = 50;
-const floorPlane = new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0));
-
-const localVector = new THREE.Vector3();
-const localVector2 = new THREE.Vector3();
-const localVector3 = new THREE.Vector3();
-const localQuaternion = new THREE.Quaternion();
-const localEuler = new THREE.Euler();
-const localRay = new THREE.Ray(); */
 
 const _patchModel = object => {
   object.scene.traverse(o => {
@@ -303,10 +84,6 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.y = 1.5;
 camera.position.z = 2;
-// camera.rotation.y = Math.PI;
-
-const cameraDolly = new THREE.Object3D();
-// cameraDolly.add(camera);
 
 const ambientLight = new THREE.AmbientLight(0x808080);
 scene.add(ambientLight);
@@ -341,17 +118,15 @@ const _bindUploadFileButton = inputFileEl => {
 _bindUploadFileButton(document.getElementById('upload-file-button'));
 
 const renderer = new THREE.WebGLRenderer({
-  // canvas: document.getElementById('canvas'),
-  // alpha: true,
   antialias: true,
 });
-// console.log('set size', window.innerWidth, window.innerHeight);
+
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.sortObjects = false;
 document.getElementById('iframe-wrapper').appendChild(renderer.domElement);
 
-const orbitControls = new THREE.OrbitControls(camera, renderer.domElement);
+const orbitControls = new OrbitControls(camera, renderer.domElement);
 orbitControls.screenSpacePanning = true;
 orbitControls.enableMiddleZoom = false;
 orbitControls.update();
