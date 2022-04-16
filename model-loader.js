@@ -1,9 +1,9 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.117.0/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.131.0/build/three.module.js';
 
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/loaders/GLTFLoader.js';
-import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/loaders/FBXLoader.js';
-import { GLTFExporter } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/exporters/GLTFExporter.js';
-import { SkeletonUtils } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/utils/SkeletonUtils.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.131.0/examples/jsm/loaders/GLTFLoader.js';
+import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.131.0/examples/jsm/loaders/FBXLoader.js';
+import { GLTFExporter } from 'https://cdn.jsdelivr.net/npm/three@0.131.0/examples/jsm/exporters/GLTFExporter.js';
+import { SkeletonUtils } from 'https://cdn.jsdelivr.net/npm/three@0.131.0/examples/jsm/utils/SkeletonUtils.js';
 import './inflate.min.js';
 import './gunzip.min.js';
 import './ProgressivePromise.js';
