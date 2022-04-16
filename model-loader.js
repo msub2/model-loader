@@ -1,7 +1,9 @@
-import './GLTFLoader.js';
-import './FBXLoader.js';
-import './GLTFExporter.js';
-import './SkeletonUtils.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.117.0/build/three.module.js';
+
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/loaders/GLTFLoader.js';
+import { FBXLoader } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/loaders/FBXLoader.js';
+import { GLTFExporter } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/exporters/GLTFExporter.js';
+import { SkeletonUtils } from 'https://cdn.jsdelivr.net/npm/three@0.117.0/examples/jsm/utils/SkeletonUtils.js';
 import './inflate.min.js';
 import './gunzip.min.js';
 import './ProgressivePromise.js';
@@ -46,9 +48,9 @@ const _patchModel = model => {
     }
   });
 
-  const saved = THREE.SkeletonUtils.clone(model.scene);
+  const saved = SkeletonUtils.clone(model.scene);
   model.export = () => new Promise((accept, reject) => {
-    new THREE.GLTFExporter().parse(saved, ab => {
+    new GLTFExporter().parse(saved, ab => {
       accept(ab);
     }, {
       binary: true,
@@ -101,7 +103,7 @@ const _loadModelFilesystem = async filesystem => {
 
     if (/\.fbx$/.test(modelFile.pathname)) {
       const model = await new Promise((accept, reject) => {
-        new THREE.FBXLoader(manager).load(modelFileUrl, scene => {
+        new FBXLoader(manager).load(modelFileUrl, scene => {
           accept({scene});
         }, function onprogress() {}, reject);
       });
@@ -109,7 +111,7 @@ const _loadModelFilesystem = async filesystem => {
       return model;
     } else {
       const model = await new Promise((accept, reject) => {
-        new THREE.GLTFLoader(manager).load(modelFileUrl, accept, xhr => {}, reject);
+        new GLTFLoader(manager).load(modelFileUrl, accept, xhr => {}, reject);
       });
       await managerLoadPromise;
       return model;
@@ -150,7 +152,7 @@ const loadModelUrl = async (href, filename = href) => {
   if (fileType === 'gltf') {
     const {manager, managerLoadPromise} = _makeManager();
     const model = await new Promise((accept, reject) => {
-      new THREE.GLTFLoader(manager).load(href, accept, xhr => {}, reject);
+      new GLTFLoader(manager).load(href, accept, xhr => {}, reject);
     });
     await managerLoadPromise;
     _patchModel(model);
@@ -241,7 +243,7 @@ const loadModelUrl = async (href, filename = href) => {
       img.src = href;
     });
     const model = await new Promise((accept, reject) => {
-      new THREE.GLTFLoader().load(`${basePath}minecraft.glb`, accept, xhr => {}, reject);
+      new GLTFLoader().load(`${basePath}minecraft.glb`, accept, xhr => {}, reject);
     });
     const texture = new THREE.Texture(img, THREE.UVMapping, THREE.ClampToEdgeWrapping, THREE.ClampToEdgeWrapping, THREE.NearestFilter, THREE.LinearMipmapLinearFilter, THREE.RGBAFormat, THREE.UnsignedByteType, 16, THREE.LinearEncoding);
     texture.flipY = false;
